@@ -4,13 +4,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
 class TextAnalytics {
     String input;
     String path;
     String file_content;
     String[] array_of_words;
-    HashMap<String, Integer> counter;
+    HashMap<String, Integer> counter = new HashMap<String, Integer>();
 
     public TextAnalytics(String path) {
         this.path = path;
@@ -44,13 +45,10 @@ class TextAnalytics {
         }
     }
 
-    public static int count_words(String input) { 
-        if (input == null || input.isEmpty()) {
-            return 0;
-        } 
-        String[] array_of_words = input.split("\\s+");
-        return array_of_words.length; 
-        }
-
-
+    public void count_words() { 
+       for (String word : this.array_of_words) {
+            Integer j = this.counter.get(word);
+            this.counter.put(word, (j == null) ? 1 : j + 1); 
+       }
+    }
 }
